@@ -30,17 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1dd593d4-9fd1-4b17-ae1f-72b655a49891" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Pintos_Project1_With Real-time Scheduler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pintos_Project1_With Real-time Scheduler.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/filesys/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/threads/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/threads/thread.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/threads/thread.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/threads/thread.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/threads/thread.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/userprog/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vm/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +86,7 @@
       <workItem from="1603032446805" duration="37000" />
       <workItem from="1603032492393" duration="12118000" />
       <workItem from="1603046466387" duration="3193000" />
-      <workItem from="1603132269038" duration="1262000" />
+      <workItem from="1603132269038" duration="4743000" />
     </task>
     <servers />
   </component>
@@ -129,9 +121,10 @@
       <screen x="65" y="0" width="1301" height="768" />
     </state>
     <state width="640" height="468" key="ImportCMakeProjectWizard.topPanel/65.0.1301.768@65.0.1301.768" timestamp="1603032486060" />
-    <state x="307" y="115" key="Vcs.Push.Dialog.v2" timestamp="1603044231142">
-      <screen x="65" y="0" width="1301" height="768" />
+    <state x="308" y="115" key="Vcs.Push.Dialog.v2" timestamp="1603133553913">
+      <screen x="66" y="0" width="1300" height="768" />
     </state>
     <state x="307" y="115" key="Vcs.Push.Dialog.v2/65.0.1301.768@65.0.1301.768" timestamp="1603044231142" />
+    <state x="308" y="115" key="Vcs.Push.Dialog.v2/66.0.1300.768@66.0.1300.768" timestamp="1603133553913" />
   </component>
 </project>

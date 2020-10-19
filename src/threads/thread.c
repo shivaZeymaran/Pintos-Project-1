@@ -148,8 +148,12 @@ thread_tick (void)
 
   //******************************************************//
   t->time_left--;
-  if (t->time_left == 0)
-      thread_exit();
+  if (t->time_left == 0) {
+      if (t->period != NOT_PERIODIC) // thread is periodic
+          t->deadline = ticks + t->period;  // update deadline
+      else
+          thread_exit();
+  }
   if (t->status != THREAD_DYING && t->deadline < ticks)   // we missed deadline
       thread_exit();
 
@@ -211,9 +215,9 @@ thread_create (const char *name, int period, int exe_time, int deadline, thread_
   if (period == NOT_PERIODIC)
       t->deadline = deadline;
   else
-      t->deadline = period;
+      t->deadline = ticks + period;
 
-  int priority = -1 * t->deadline;
+  int64_t priority = -1 * t->deadline;
 
   /* Initialize thread. */
   init_thread (t, name, priority);
@@ -243,10 +247,8 @@ thread_create (const char *name, int period, int exe_time, int deadline, thread_
 
   //************************************************************//
   /* Add to run queue. */
-  if (t->period != NOT_PERIODIC) {
-      struct thread *ta = list_entry (list_pop_front (&all_list),
-                                      struct thread, allelem);
-      if (((ticks - ta->arrival_time) % ta->period == 0))
+  if (t->period != NOT_PERIODIC) {  // thread is periodic
+      if (((ticks - t->arrival_time) % t->period == 0))
           thread_unblock(t);
   }
   else
@@ -403,7 +405,7 @@ thread_foreach (thread_action_func *func, void *aux)
     }
 }
 
-//********** Delete this method ************************//
+//**************************** Delete this method ************************************//
 // because we assume constant priority and constant deadline for each thread in these algorithms
 /* Sets the current thread's priority to NEW_PRIORITY. */
 void

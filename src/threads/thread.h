@@ -118,11 +118,11 @@ struct thread
     unsigned magic;                     /* Detects stack overflow. */
 
     //********************************************************************//
-    int arrival_time;
-    int period;
-    int exe_time;
-    int deadline;
-    int time_left;   // Execution time left
+    uint64_t arrival_time;
+    uint64_t period;
+    uint64_t exe_time;
+    uint64_t deadline;
+    uint64_t time_left;   // Execution time left
   };
 
 /* If false (default), use round-robin scheduler.
