@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Pintos_Project1_With_Real_time_Scheduler" targetName="Pintos_Project1_With_Real_time_Scheduler" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1dd593d4-9fd1-4b17-ae1f-72b655a49891" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Pintos_Project1_With Real-time Scheduler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pintos_Project1_With Real-time Scheduler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/filesys/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/threads/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/threads/thread.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/threads/thread.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/threads/thread.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/threads/thread.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userprog/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vm/.gitignore" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1j2jGvxRXur0JLG77zppB0w2byO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Pintos_Project1_With_Real_time_Scheduler" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pintos_Project1_With_Real_time_Scheduler" TARGET_NAME="Pintos_Project1_With_Real_time_Scheduler" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Pintos_Project1_With_Real_time_Scheduler" RUN_TARGET_NAME="Pintos_Project1_With_Real_time_Scheduler">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1dd593d4-9fd1-4b17-ae1f-72b655a49891" name="Default Changelist" comment="" />
+      <created>1603008988631</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603008988631</updated>
+      <workItem from="1603008992663" duration="81000" />
+      <workItem from="1603009076338" duration="1907000" />
+      <workItem from="1603031039799" duration="648000" />
+      <workItem from="1603032446805" duration="37000" />
+      <workItem from="1603032492393" duration="12118000" />
+      <workItem from="1603046466387" duration="3193000" />
+      <workItem from="1603132269038" duration="1262000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="495" y="137" key="FileChooserDialogImpl" timestamp="1603032472970">
+      <screen x="65" y="0" width="1301" height="768" />
+    </state>
+    <state x="495" y="137" key="FileChooserDialogImpl/65.0.1301.768@65.0.1301.768" timestamp="1603032472970" />
+    <state width="640" height="200" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1603032486060">
+      <screen x="65" y="0" width="1301" height="768" />
+    </state>
+    <state width="640" height="200" key="ImportCMakeProjectWizard.bottomPanel/65.0.1301.768@65.0.1301.768" timestamp="1603032486060" />
+    <state width="640" height="468" key="ImportCMakeProjectWizard.topPanel" timestamp="1603032486060">
+      <screen x="65" y="0" width="1301" height="768" />
+    </state>
+    <state width="640" height="468" key="ImportCMakeProjectWizard.topPanel/65.0.1301.768@65.0.1301.768" timestamp="1603032486060" />
+    <state x="307" y="115" key="Vcs.Push.Dialog.v2" timestamp="1603044231142">
+      <screen x="65" y="0" width="1301" height="768" />
+    </state>
+    <state x="307" y="115" key="Vcs.Push.Dialog.v2/65.0.1301.768@65.0.1301.768" timestamp="1603044231142" />
+  </component>
+</project>

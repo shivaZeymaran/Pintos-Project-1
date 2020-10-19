@@ -1,0 +1,4 @@
+"D:\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "E:\term7\Az OS\Pintos_Project1_With Real-time Scheduler"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/term7/Az OS/Pintos_Project1_With Real-time Scheduler/cmake-build-debug

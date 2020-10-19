@@ -20,10 +20,11 @@ enum thread_status
 typedef int tid_t;
 #define TID_ERROR ((tid_t) -1)          /* Error value for tid_t. */
 
+//*****************************************************************************//
 /* Thread priorities. */
-#define PRI_MIN 0                       /* Lowest priority. */
-#define PRI_DEFAULT 31                  /* Default priority. */
-#define PRI_MAX 63                      /* Highest priority. */
+#define PRI_MIN -2147483647                       /* Lowest priority. */
+#define PRI_DEFAULT 0                             /* Default priority. */
+#define PRI_MAX 2147483647                        /* Highest priority. */
 
 /* A kernel thread or user process.
 
@@ -115,6 +116,13 @@ struct thread
 
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
+
+    //********************************************************************//
+    int arrival_time;
+    int period;
+    int exe_time;
+    int deadline;
+    int time_left;   // Execution time left
   };
 
 /* If false (default), use round-robin scheduler.
@@ -129,7 +137,8 @@ void thread_tick (void);
 void thread_print_stats (void);
 
 typedef void thread_func (void *aux);
-tid_t thread_create (const char *name, int priority, thread_func *, void *);
+//*************************************************************//
+tid_t thread_create (const char *name, int period, int exe_time, int deadline, thread_func *function, void *aux);
 
 void thread_block (void);
 void thread_unblock (struct thread *);

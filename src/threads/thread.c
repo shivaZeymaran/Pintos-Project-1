@@ -12,6 +12,7 @@
 #include "threads/synch.h"
 #include "threads/vaddr.h"
 #include "threads/fixed_point.h"
+#include "timer.c"    //************************************************//
 #ifdef USERPROG
 #include "userprog/process.h"
 #endif
@@ -25,6 +26,11 @@
 #define LOAD_AVG_DEFAULT 0
 
 #define DEPTH_LIMIT 8
+
+//***************************************************************************************//
+#define NOT_PERIODIC -1
+#define MAX_DEADLINE 2147483647
+#define MIN_EXE_TIME 0
 
 /* Random value for struct thread's `magic' member.
    Used to detect stack overflow.  See the big comment at the top
@@ -121,7 +127,8 @@ thread_start (void)
   /* Create the idle thread. */
   struct semaphore idle_started;
   sema_init (&idle_started, 0);
-  thread_create ("idle", PRI_MIN, idle, &idle_started);
+  //**************************************************************************//
+  thread_create ("idle", NOT_PERIODIC, MIN_EXE_TIME, MAX_DEADLINE, idle, &idle_started);
 
   load_avg = LOAD_AVG_DEFAULT;
 
@@ -138,6 +145,13 @@ void
 thread_tick (void) 
 {
   struct thread *t = thread_current ();
+
+  //******************************************************//
+  t->time_left--;
+  if (t->time_left == 0)
+      thread_exit();
+  if (t->status != THREAD_DYING && t->deadline < ticks)   // we missed deadline
+      thread_exit();
 
   /* Update statistics. */
   if (t == idle_thread)
@@ -174,8 +188,7 @@ thread_print_stats (void)
    PRIORITY, but no actual priority scheduling is implemented.
    Priority scheduling is the goal of Problem 1-3. */
 tid_t
-thread_create (const char *name, int priority,
-               thread_func *function, void *aux) 
+thread_create (const char *name, int period, int exe_time, int deadline, thread_func *function, void *aux)
 {
   struct thread *t;
   struct kernel_thread_frame *kf;
@@ -190,6 +203,17 @@ thread_create (const char *name, int priority,
   t = palloc_get_page (PAL_ZERO);
   if (t == NULL)
     return TID_ERROR;
+
+  //************************************ Added for Real-time scheduler *******************************//
+  t->arrival_time = ticks;  // arrival time is the time that thread created
+  t->period = period;
+  t->exe_time = exe_time;
+  if (period == NOT_PERIODIC)
+      t->deadline = deadline;
+  else
+      t->deadline = period;
+
+  int priority = -1 * t->deadline;
 
   /* Initialize thread. */
   init_thread (t, name, priority);
@@ -217,8 +241,16 @@ thread_create (const char *name, int priority,
 
   intr_set_level (old_level);
 
+  //************************************************************//
   /* Add to run queue. */
-  thread_unblock (t);
+  if (t->period != NOT_PERIODIC) {
+      struct thread *ta = list_entry (list_pop_front (&all_list),
+                                      struct thread, allelem);
+      if (((ticks - ta->arrival_time) % ta->period == 0))
+          thread_unblock(t);
+  }
+  else
+    thread_unblock (t);
 
   old_level = intr_disable ();
   test_max_priority();
@@ -260,10 +292,21 @@ thread_unblock (struct thread *t)
 
   old_level = intr_disable ();
   ASSERT (t->status == THREAD_BLOCKED);
+
+  //*****************************************************//
+  if (t->status != THREAD_DYING && t->deadline < ticks) {  // we missed deadline
+      intr_set_level (old_level);
+      thread_exit();
+  }
+
   list_insert_ordered(&ready_list, &t->elem,
 		      (list_less_func *) &cmp_priority,
 		      NULL);
   t->status = THREAD_READY;
+
+  //**********************************************************//
+  t->time_left = t->exe_time;
+
   intr_set_level (old_level);
 }
 
@@ -360,6 +403,8 @@ thread_foreach (thread_action_func *func, void *aux)
     }
 }
 
+//********** Delete this method ************************//
+// because we assume constant priority and constant deadline for each thread in these algorithms
 /* Sets the current thread's priority to NEW_PRIORITY. */
 void
 thread_set_priority (int new_priority) 
