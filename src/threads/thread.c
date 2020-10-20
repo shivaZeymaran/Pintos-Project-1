@@ -12,7 +12,11 @@
 #include "threads/synch.h"
 #include "threads/vaddr.h"
 #include "threads/fixed_point.h"
-#include "timer.c"    //************************************************//
+
+//***************************** Refinement 1 **********************************//
+// Add this file to use variable ticks that is Number of timer ticks since OS booted
+#include "timer.c"
+
 #ifdef USERPROG
 #include "userprog/process.h"
 #endif
@@ -27,10 +31,10 @@
 
 #define DEPTH_LIMIT 8
 
-//***************************************************************************************//
-#define NOT_PERIODIC -1
-#define MAX_DEADLINE 2147483647
-#define MIN_EXE_TIME 0
+//***************************** Refinement 2 **********************************//
+#define NOT_PERIODIC -1            // when thread is not periodic
+#define MAX_DEADLINE 2147483647    // max deadline for idle thread (means can run for max time possible)
+#define MIN_EXE_TIME 0             // min execution time for idle thread (it shouldn't take time in cpu)
 
 /* Random value for struct thread's `magic' member.
    Used to detect stack overflow.  See the big comment at the top
@@ -146,10 +150,10 @@ thread_tick (void)
 {
   struct thread *t = thread_current ();
 
-  //******************************************************//
+  //***************************** Refinement 3 **********************************//
   t->time_left--;
   if (t->time_left == 0) {
-      if (t->period != NOT_PERIODIC) // thread is periodic
+      if (t->period != NOT_PERIODIC)  // thread is periodic
           t->deadline = ticks + t->period;  // update deadline
       else
           thread_exit();
@@ -208,11 +212,11 @@ thread_create (const char *name, int period, int exe_time, int deadline, thread_
   if (t == NULL)
     return TID_ERROR;
 
-  //************************************ Added for Real-time scheduler *******************************//
+  //***************************** Refinement 4 **********************************//
   t->arrival_time = ticks;  // arrival time is the time that thread created
   t->period = period;
   t->exe_time = exe_time;
-  if (period == NOT_PERIODIC)
+  if (period == NOT_PERIODIC)  // thread is not periodic
       t->deadline = deadline;
   else
       t->deadline = ticks + period;
@@ -245,9 +249,11 @@ thread_create (const char *name, int period, int exe_time, int deadline, thread_
 
   intr_set_level (old_level);
 
-  //************************************************************//
+  //***************************** Refinement 5 **********************************//
   /* Add to run queue. */
   if (t->period != NOT_PERIODIC) {  // thread is periodic
+      // add periodic thread to run queue if and only if, it's on thread's period
+      // for the first time it's okay because "arrival_time = ticks"
       if (((ticks - t->arrival_time) % t->period == 0))
           thread_unblock(t);
   }
@@ -295,9 +301,10 @@ thread_unblock (struct thread *t)
   old_level = intr_disable ();
   ASSERT (t->status == THREAD_BLOCKED);
 
-  //*****************************************************//
+  //***************************** Refinement 6 **********************************//
   if (t->status != THREAD_DYING && t->deadline < ticks) {  // we missed deadline
       intr_set_level (old_level);
+      // we don't need task anymore, so exit it
       thread_exit();
   }
 
@@ -306,8 +313,8 @@ thread_unblock (struct thread *t)
 		      NULL);
   t->status = THREAD_READY;
 
-  //**********************************************************//
-  t->time_left = t->exe_time;
+  //***************************** Refinement 7 **********************************//
+  t->time_left = t->exe_time;   // thread added to ready list just now
 
   intr_set_level (old_level);
 }
@@ -345,7 +352,7 @@ thread_tid (void)
   return thread_current ()->tid;
 }
 
-/* Deschedules the current thread and destroys it.  Never
+/* De-schedules the current thread and destroys it.  Never
    returns to the caller. */
 void
 thread_exit (void) 
@@ -405,7 +412,8 @@ thread_foreach (thread_action_func *func, void *aux)
     }
 }
 
-//**************************** Delete this method ************************************//
+//***************************** Refinement 8 **********************************//
+// Delete this method 
 // because we assume constant priority and constant deadline for each thread in these algorithms
 /* Sets the current thread's priority to NEW_PRIORITY. */
 void
