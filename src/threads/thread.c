@@ -131,7 +131,9 @@ thread_start (void)
   /* Create the idle thread. */
   struct semaphore idle_started;
   sema_init (&idle_started, 0);
-  //**************************************************************************//
+
+  //***************************** Refinement 3 **********************************//
+  // set new parameters for idle thread
   thread_create ("idle", NOT_PERIODIC, MIN_EXE_TIME, MAX_DEADLINE, idle, &idle_started);
 
   load_avg = LOAD_AVG_DEFAULT;
@@ -150,7 +152,7 @@ thread_tick (void)
 {
   struct thread *t = thread_current ();
 
-  //***************************** Refinement 3 **********************************//
+  //***************************** Refinement 4 **********************************//
   t->time_left--;
   if (t->time_left == 0) {
       if (t->period != NOT_PERIODIC)  // thread is periodic
@@ -212,7 +214,7 @@ thread_create (const char *name, int period, int exe_time, int deadline, thread_
   if (t == NULL)
     return TID_ERROR;
 
-  //***************************** Refinement 4 **********************************//
+  //***************************** Refinement 5 **********************************//
   t->arrival_time = ticks;  // arrival time is the time that thread created
   t->period = period;
   t->exe_time = exe_time;
@@ -249,7 +251,7 @@ thread_create (const char *name, int period, int exe_time, int deadline, thread_
 
   intr_set_level (old_level);
 
-  //***************************** Refinement 5 **********************************//
+  //***************************** Refinement 6 **********************************//
   /* Add to run queue. */
   if (t->period != NOT_PERIODIC) {  // thread is periodic
       // add periodic thread to run queue if and only if, it's on thread's period
@@ -301,7 +303,7 @@ thread_unblock (struct thread *t)
   old_level = intr_disable ();
   ASSERT (t->status == THREAD_BLOCKED);
 
-  //***************************** Refinement 6 **********************************//
+  //***************************** Refinement 7 **********************************//
   if (t->status != THREAD_DYING && t->deadline < ticks) {  // we missed deadline
       intr_set_level (old_level);
       // we don't need task anymore, so exit it
@@ -313,7 +315,7 @@ thread_unblock (struct thread *t)
 		      NULL);
   t->status = THREAD_READY;
 
-  //***************************** Refinement 7 **********************************//
+  //***************************** Refinement 8 **********************************//
   t->time_left = t->exe_time;   // thread added to ready list just now
 
   intr_set_level (old_level);
@@ -412,8 +414,8 @@ thread_foreach (thread_action_func *func, void *aux)
     }
 }
 
-//***************************** Refinement 8 **********************************//
-// Delete this method 
+//***************************** Refinement 9 **********************************//
+// Delete this method
 // because we assume constant priority and constant deadline for each thread in these algorithms
 /* Sets the current thread's priority to NEW_PRIORITY. */
 void
