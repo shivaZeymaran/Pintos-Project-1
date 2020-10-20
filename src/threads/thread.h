@@ -20,11 +20,12 @@ enum thread_status
 typedef int tid_t;
 #define TID_ERROR ((tid_t) -1)          /* Error value for tid_t. */
 
-//*****************************************************************************//
+//***************************** Refinement 1 **********************************//
+// change priority domain, because it will set by deadline
 /* Thread priorities. */
-#define PRI_MIN -2147483647                       /* Lowest priority. */
-#define PRI_DEFAULT 0                             /* Default priority. */
-#define PRI_MAX 2147483647                        /* Highest priority. */
+#define PRI_MIN -2147483647           /* Lowest priority. Min possible integer */
+#define PRI_DEFAULT 0                 /* Default priority. */
+#define PRI_MAX 2147483647            /* Highest priority. Max possible integer number */
 
 /* A kernel thread or user process.
 
@@ -117,12 +118,13 @@ struct thread
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
 
-    //********************************************************************//
+    //***************************** Refinement 2 **********************************//
     uint64_t arrival_time;
-    uint64_t period;
-    uint64_t exe_time;
+    int64_t period;         // if thread is not periodic, set this to -1
+    uint64_t exe_time;      // time needed to complete the task in cpu
     uint64_t deadline;
-    uint64_t time_left;   // Execution time left
+    uint64_t time_left;     // Execution time left
+
   };
 
 /* If false (default), use round-robin scheduler.
@@ -137,7 +139,9 @@ void thread_tick (void);
 void thread_print_stats (void);
 
 typedef void thread_func (void *aux);
-//*************************************************************//
+
+//***************************** Refinement 3 **********************************//
+// Add 3 parameters to this prototype (period, exe_time and deadline)
 tid_t thread_create (const char *name, int period, int exe_time, int deadline, thread_func *function, void *aux);
 
 void thread_block (void);
