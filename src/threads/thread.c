@@ -153,6 +153,14 @@ thread_tick (void)
   struct thread *t = thread_current ();
 
   //***************************** Refinement 4 **********************************//
+  struct list_elem *e;
+  for (e = list_begin (&all_list); e != list_end (&all_list); e = list_next (e)){  // search in all threads
+      struct thread *ta = list_entry (e, struct thread, allelem);
+      if (ta->status == THREAD_BLOCKED && ta->period != NOT_PERIODIC) // periodic blocked thread
+          if (((ticks - t->arrival_time) % t->period == 0))
+              thread_unblock(ta);
+  }
+
   t->time_left--;
   if (t->time_left == 0) {
       if (t->period != NOT_PERIODIC) { // thread is periodic
@@ -160,14 +168,17 @@ thread_tick (void)
           t->priority = -1 * t->deadline;
           if (((ticks - t->arrival_time) % t->period == 0))  // thread finishes its work exactly on period
               thread_unblock(t);
-          else  // thread may finish its work before next period
+          else  // thread may finish its work before next period, so temporarily block it
               thread_block();
       }
       else
           thread_exit();
   }
+  // time_left is not zero
   if (t->status != THREAD_DYING && t->deadline < ticks)   // we missed deadline
       thread_exit();
+
+  //*****************************************************************************//
 
   /* Update statistics. */
   if (t == idle_thread)
