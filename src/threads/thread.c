@@ -155,8 +155,12 @@ thread_tick (void)
   //***************************** Refinement 4 **********************************//
   t->time_left--;
   if (t->time_left == 0) {
-      if (t->period != NOT_PERIODIC)  // thread is periodic
+      if (t->period != NOT_PERIODIC) { // thread is periodic
           t->deadline = ticks + t->period;  // update deadline
+          t->priority = -1 * t->deadline;
+          if (((ticks - t->arrival_time) % t->period == 0))
+              thread_unblock(t);
+      }
       else
           thread_exit();
   }
