@@ -158,8 +158,10 @@ thread_tick (void)
       if (t->period != NOT_PERIODIC) { // thread is periodic
           t->deadline = ticks + t->period;  // update deadline
           t->priority = -1 * t->deadline;
-          if (((ticks - t->arrival_time) % t->period == 0))
+          if (((ticks - t->arrival_time) % t->period == 0))  // thread finishes its work exactly on period
               thread_unblock(t);
+          else  // thread may finish its work before next period
+              thread_block();
       }
       else
           thread_exit();
